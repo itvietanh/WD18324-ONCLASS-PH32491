@@ -23,8 +23,9 @@
             <!-- place navbar here -->
         </header>
         <main>
-            <h1>Welcome Laravel</h1>
-            <table border="1">
+            <div class="container text-center">
+            <h1>Thong tin ca nhan</h1>
+            <table class="table shadow-lg border-3">
                 <thead>
                     <th>ID</th>
                     <th>Name</th>
@@ -43,6 +44,8 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
+            
         </main>
         <footer>
             <!-- place footer here -->
