@@ -11,7 +11,8 @@ class ProfileController extends Controller
         $info = [
             [
                 'id' => 1,
-                'name' => 'Vu VIet Anh',
+                'name' => 'Vũ Việt Anh',
+                'address' => 'Hưng Yên',
                 'birthday' => '2004',
                 'mssv' => 'PH32491'
             ],

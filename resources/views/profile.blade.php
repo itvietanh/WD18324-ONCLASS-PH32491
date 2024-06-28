@@ -20,32 +20,28 @@
 
     <body>
         <header>
+            <div class="text-center">
+                <h1 class="title">Thông tin cá nhân</h1>
+            </div>
             <!-- place navbar here -->
         </header>
         <main>
-            <div class="container text-center">
-            <h1>Thong tin ca nhan</h1>
-            <table class="table shadow-lg border-3">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Birthday</th>
-                    <th>MSSV</th>
-                </thead>
-
-                <tbody>
-                    @foreach($info as $value) 
-                        <tr>
-                            <td>{{$value['id']}}</td>
-                            <td>{{$value['name']}}</td>
-                            <td>{{$value['birthday']}}</td>
-                            <td>{{$value['mssv']}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="container d-flex justify-content-center shadow-lg rounded-2 w-50">
+                <div class="row w-50 my-4">
+                    <div class="col">
+                        <img class="w-75 h-75" src="/images/vanh.jpg" alt="avt">
+                    </div>
+                    <div class="col ">
+                        @foreach($info as $value) 
+                            @php extract($value) @endphp
+                            <p>{{ $name }}</p>
+                            <p>{{ $address }}</p>
+                            <p>{{ $birthday }}</p>
+                            <p>{{ $mssv }}</p>
+                        @endforeach
+                    </div>
+                </div>
             </div>
-            
         </main>
         <footer>
             <!-- place footer here -->
