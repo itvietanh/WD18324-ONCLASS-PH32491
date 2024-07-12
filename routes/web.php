@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +19,35 @@ use App\Http\Controllers\ProfileController;
 //BASE URL
 // const BASE_URL = 'http://127.0.0.1:8000/';
 
-Route::get('/test', function() {
-    echo 'Hello World';
+
+
+//CRUD => Query Builder
+Route::group([
+    'prefix' => 'users',
+    'as' => 'users.',
+], function() {
+    Route::get('list-user', [UserController::class, 'listUser'])->name('listUser');
+    Route::get('add', [UserController::class, 'addUser']) -> name('addUser');
+    Route::post('submit-user', [UserController::class, 'handlerSubmitForm']) -> name('submitUser');
+    Route::get('edit-user/{id}', [UserController::class, 'handlerUpdateUser']) -> name('editUser');
+    Route::post('update-user/{id}', [UserController::class, 'handlerUpdate']) -> name('updateUser');
+    Route::get('delete-user/{id}', [UserController::class, 'handlerDeleteUser']) -> name('deleteUser');
 });
 
-Route::get('/list-product', [ProductController::class, 'listProduct']);
-Route::get('/profile', [ProfileController::class, 'profile']);
+Route::group([
+    'prefix' => 'product',
+    'as' => 'products.',
+], function() {
+    Route::get('list-product', [ProductController::class, 'getListProduct'])->name('listProduct');
+    Route::get('add-product', [ProductController::class, 'addProduct'])->name('addProduct');
+    Route::post('submit-product', [ProductController::class, 'submitProduct'])->name('submitProduct');
+    Route::get('delete-product/{id}', [ProductController::class, 'handlerDeleteProduct']) -> name('deleteProduct');
+    Route::get('edit-product/{id}', [ProductController::class, 'handlerUpdateProduct']) -> name('editProduct');
+    Route::post('update-product/{id}', [ProductController::class, 'handlerUpdate']) -> name('updateProduct');
+});
 
-//Params
-Route::get('update', [ProductController::class, 'updateProduct']);
 
-//Slug
-Route::get('/{id}', [ProductController::class, 'findOne']);
+
 
 
 Route::get('/', function () {

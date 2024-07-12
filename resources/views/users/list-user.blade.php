@@ -20,28 +20,39 @@
 
     <body>
         <header>
-            <div class="text-center">
-                <h1 class="title">Thông tin cá nhân</h1>
-            </div>
             <!-- place navbar here -->
+             <div class="float-right">
+                <a href="{{ route('users.addUser') }}" class="btn btn-primary">ADD</a>
+             </div>
         </header>
-        <main> 
-            <div class="container d-flex justify-content-center shadow-lg rounded-2 w-50">
-                <div class="row w-50 my-4">
-                    <div class="col">
-                        <img class="w-75 h-75" src="/images/vanh.jpg" alt="avt">
-                    </div>
-                    <div class="col ">
-                        @foreach($info as $value) 
-                            @php extract($value) @endphp
-                            <p>{{ $name }}</p>
-                            <p>{{ $address }}</p>
-                            <p>{{ $birthday }}</p>
-                            <p>{{ $mssv }}</p>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+        <main>
+        <div>
+    <table class="table">
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>PB</th>
+            <th>Tuoi</th>
+            <th>Action</th>
+        </thead>
+
+        <tbody>
+            @foreach($listUser as $value)
+                <tr>
+                    <td>{{ $value -> id }}</td>
+                    <td>{{ $value -> name }}</td>
+                    <td>{{ $value -> email }}</td>
+                    <td>{{ $value -> ten_donvi }}</td>
+                    <td>{{ $value -> tuoi }}</td>
+                    <td><a href="{{ route('users.editUser', $value -> id) }}">Edit</a> | <a href="{{ route('users.deleteUser', $value -> id) }}">Delete</a></td>
+                </tr>
+            @endforeach
+           
+        </tbody>
+    </table>
+</div>
+
         </main>
         <footer>
             <!-- place footer here -->

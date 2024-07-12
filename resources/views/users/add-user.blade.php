@@ -19,29 +19,42 @@
     </head>
 
     <body>
-        <header>
-            <div class="text-center">
-                <h1 class="title">Thông tin cá nhân</h1>
-            </div>
+        <header class="container">
             <!-- place navbar here -->
+             <h1>ADD USER</h1>
         </header>
-        <main> 
-            <div class="container d-flex justify-content-center shadow-lg rounded-2 w-50">
-                <div class="row w-50 my-4">
-                    <div class="col">
-                        <img class="w-75 h-75" src="/images/vanh.jpg" alt="avt">
-                    </div>
-                    <div class="col ">
-                        @foreach($info as $value) 
-                            @php extract($value) @endphp
-                            <p>{{ $name }}</p>
-                            <p>{{ $address }}</p>
-                            <p>{{ $birthday }}</p>
-                            <p>{{ $mssv }}</p>
-                        @endforeach
-                    </div>
+        <main class="container">
+            <form action="{{ route('users.submitUser') }}" class="" method="post">
+                @csrf
+                <div >
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name">
                 </div>
-            </div>
+
+                <div >
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                
+                <div >
+                    <label for="">Phong Ban</label>
+                    <select name="phongban_id" class="form-control">
+                        @foreach ($phongban as $value)
+                            <option value="{{ $value -> id }}">{{ $value -> ten_donvi }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
+                <div >
+                    <label for="">Tuoi</label>
+                    <input type="text" name="tuoi" class="form-control">
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success" name="btnSubmit">ADD</button>
+                </div>
+
+            </form>
         </main>
         <footer>
             <!-- place footer here -->
