@@ -4,40 +4,32 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use function Laravel\Prompts\table;
-use function Termwind\render;
-
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function getListProduct(Request $request)
     {
-        if ($request -> kyw) {
-            $query = $request->kyw;
-
+        if (isset($request->kyw)) {
+            $kyw = $request->kyw;
             $products = DB::table('product')
                 ->join('category', 'product.category_id', '=', 'category.id')
                 ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')
-                ->where('product.name', 'LIKE', "%{$query}%")
+                ->where('product.name', 'LIKE', "%{$kyw}%")
                 ->get();
-
-            return view('list-product', ['products' => $products]);
+        } else {
+            $products = DB::table('product')
+                ->join('category', 'product.category_id', '=', 'category.id')
+                ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')
+                ->orderBy('product.view', 'asc')
+                ->get();
         }
 
-        $products = DB::table('product')
-            ->join('category', 'product.category_id', '=', 'category.id')
-            ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')
-            ->orderBy('product.view', 'asc')
-            ->get();
         return view('list-product', ['products' => $products]);
     }
 
     public function addProduct(Request $request)
     {
-
-
         $danhMuc = DB::table('category')->get();
         return view('add-product', ["danhMuc" => $danhMuc]);
     }
@@ -70,7 +62,7 @@ class ProductController extends Controller
             ->where('product.id', '=', $id)
             ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')->first();
 
-            $danhMuc = DB::table('category')->get();
+        $danhMuc = DB::table('category')->get();
 
 
         return view("edit-product", ['product' => $product, 'danhMuc' => $danhMuc]);
@@ -90,7 +82,5 @@ class ProductController extends Controller
         DB::table("product")->where('id', '=', $id)->update($dataUpdate);
 
         return redirect()->route('products.listProduct');
-
     }
-
 }
