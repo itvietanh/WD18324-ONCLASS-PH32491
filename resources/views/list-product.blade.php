@@ -19,7 +19,7 @@
                 <a href="{{ route('products.addProduct') }}"><button class="btn btn-primary">Add Product</button></a>
             </div>
             <div class="col">
-                <h4>Tim kiem</h4>
+                <h6>Tìm kiếm</h6>
                 @csrf
                 <form action="{{ route('products.listProduct') }}" method="get">
                     <div class="row">
@@ -28,8 +28,7 @@
                         </div>
 
                         <div class="col-4">
-                            <input type="submit" class="btn btn-success" name="btnSumit">
-
+                            <input type="submit" class="btn btn-success" name="btnSumit" value="Tìm Kiếm">
                         </div>
 
                     </div>

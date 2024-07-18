@@ -80,4 +80,8 @@ class UserController extends Controller
         DB::table("users")->where('id', '=', $id)->delete();
         return redirect()->route('users.listUser');
     }
+
+    public function test() {
+        return view('admin.products.list-product', []);
+    }
 }

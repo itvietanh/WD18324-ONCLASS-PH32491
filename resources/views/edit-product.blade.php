@@ -35,10 +35,12 @@
                     <label for="">Danh muc</label>
                     <select name="category_id" class="form-control">
                         @foreach ($danhMuc as $value)
-                            <option value="{{ $value -> id }}" 
-                            @if($value->id === $product->id)
+                            <option 
+                            @if($value->id === $product->category_id)
                                 selected
                             @endif
+                            value="{{ $value -> id }}" 
+                            
                                 >{{ $value -> name }}</option>
                         @endforeach
                     </select>

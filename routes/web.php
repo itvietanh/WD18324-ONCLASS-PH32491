@@ -47,6 +47,7 @@ Route::group([
 });
 
 
+Route::get('test', [UserController::class, 'test']);
 
 
 

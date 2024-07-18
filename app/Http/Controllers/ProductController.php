@@ -21,7 +21,7 @@ class ProductController extends Controller
             $products = DB::table('product')
                 ->join('category', 'product.category_id', '=', 'category.id')
                 ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')
-                ->orderBy('product.view', 'asc')
+                ->orderBy('product.view', 'desc')
                 ->get();
         }
 
@@ -60,7 +60,7 @@ class ProductController extends Controller
         $product = DB::table("product")
             ->join('category', 'product.category_id', '=', 'category.id')
             ->where('product.id', '=', $id)
-            ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view')->first();
+            ->select('product.id', 'product.name', 'category.name as catName', 'product.price', 'product.view', 'product.category_id')->first();
 
         $danhMuc = DB::table('category')->get();
 
