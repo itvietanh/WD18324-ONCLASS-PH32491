@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_comment', function (Blueprint $table) {
-            $table->increments('product_comment');
-            $table->unsignedInteger('user_id'); // unsigned : ko am
-            $table->unsignedInteger('product_id');
+        Schema::create('orders', function (Blueprint $table) {
+            $table->increments('order_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')
                 ->references('user_id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('product_id')
-                ->references('product_id')->on('products')
-                ->onDelete('cascade');
-            $table->string('comment', 500);   
             $table->timestamps();
+            $table->float('totalPrice', 8, 2);
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_comment');
+        Schema::dropIfExists('orders');
     }
 };
